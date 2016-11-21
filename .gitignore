@@ -2,3 +2,4 @@ views/bower_components/
 node_modules/
 .idea/
 dist/
+src/browser/script.js

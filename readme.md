@@ -15,7 +15,6 @@ DofusTouch No-Emu fonctionne sur :
 $ git clone https://github.com/scapain/dofustouch-noemu.git
 $ cd dofustouch-noemu
 $ npm install
-$ bower install
 ```
 
 ## Lancement :
@@ -41,10 +40,9 @@ $ tar czvf update.tar.gz ./node_modules ./src ./package.json ./conf.json
 
 ## Todos
 
- - Sauvegarde de plusieurs comptes via la sauvegarde de Frame
- - Amélioration des onglets
- - Création de raccoursis IG (accés Inventaire, carte, sorts, etc)
+ - Auto-Save possibilité de sauvegarder une combinaison d'onglet
  - Raccourci pour aller sur l'onglet actif (onglet sur le quel c'est au tour du joueur)
+ - Déplacement circulaire entre les onglets
 
 License
 ----
