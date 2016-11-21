@@ -1,21 +1,20 @@
 const electronLocalshortcut = require('electron-localshortcut');
 const async = require('async');
-const fileAsync = require('lowdb/lib/file-async');
+const settings = require('electron-settings');
 const {app} = require('electron');
 
 const Emulator = require('./Emulator');
 
 class ShortCuts {
 
-    constructor(win, config){
+    constructor(win){
         this.win = win;
         this.start = false;
-        this.config = config;
     }
 
     init(){
         // tabs
-        async.forEachOf(this.config.get('option.shortcut.no-emu.tabs').value(), (shortcut, index, callback) => {
+        async.forEachOf(settings.getSync('option.shortcut.no-emu.tabs'), (shortcut, index, callback) => {
             if(shortcut){
                 electronLocalshortcut.register(this.win, ShortCuts.convert(shortcut), (e) => {
                     this.win.webContents.send('switchTab', index);

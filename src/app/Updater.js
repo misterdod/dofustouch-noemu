@@ -1,4 +1,4 @@
-const {app, dialog} = require('electron');
+const {app, dialog, shell} = require('electron');
 const {BrowserWindow} = require('electron');
 const http = require('http');
 const path = require('path');
@@ -20,7 +20,7 @@ class Updater {
             message: 'Impossible de vérifier les mises à jours...\nVérifiez votre connexion à Internet.',
             buttons: ['Fermer']
         },() => {
-                Updater.startGame();
+            Updater.startGame();
         });
     }
 
@@ -47,22 +47,39 @@ class Updater {
 
                     if (Updater.responseBody.version || Emulator.devMode) {
 
-                        if (Updater.responseBody.version != Emulator.version /*|| Emulator.devMode*/) {
+                        if (Updater.responseBody.new) {
 
                             dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
                                 type: 'info',
                                 title: 'Nouvelle version : ' + Updater.responseBody.version,
-                                message: 'Une nouvelle version est disponible de DofusTouchNoEmu!\n',
+                                message: 'Une nouvelle version est disponible de DofusTouchNoEmu, vous devez la télécharger depuis notre site!\n',
                                 buttons: ['Télécharger', 'Ignorer']
                             }, (buttonIndex) => {
                                 if(buttonIndex == 0){
-                                    Updater.startUpdate();
+                                    shell.openExternal("http://dofustouch.no-emu.com/#download")
                                 }else{
                                     Updater.startGame();
                                 }
                             });
                         }else{
-                            Updater.startGame();
+
+                            if (Updater.responseBody.version != Emulator.version /*|| Emulator.devMode*/) {
+
+                                dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
+                                    type: 'info',
+                                    title: 'Nouvelle version : ' + Updater.responseBody.version,
+                                    message: 'Une nouvelle version est disponible de DofusTouchNoEmu!\n',
+                                    buttons: ['Télécharger', 'Ignorer']
+                                }, (buttonIndex) => {
+                                    if(buttonIndex == 0){
+                                        Updater.startUpdate();
+                                    }else{
+                                        Updater.startGame();
+                                    }
+                                });
+                            }else{
+                                Updater.startGame();
+                            }
                         }
                     } else {
                         this.failedCheckUpdates();

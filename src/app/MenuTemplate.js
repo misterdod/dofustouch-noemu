@@ -1,9 +1,11 @@
 const {app, ipcMain} = require('electron');
+const settings = require('electron-settings');
+
 const ShortCuts = require('./ShortCuts');
 
 class MenuTemplate {
 
-    static build(config, Emulator){
+    static build(Emulator){
 
         const template = [
             {
@@ -11,14 +13,14 @@ class MenuTemplate {
                 submenu: [
                     {
                         label: 'Nouvelle Fenetre',
-                        accelerator: ShortCuts.convert(config.get('option.shortcut.no-emu.new-window').value()),
+                        accelerator: ShortCuts.convert(settings.getSync('option.shortcut.no-emu.new-window')),
                         click (item, focusedWindow) {
                             Emulator.openGameWindow();
                         }
                     },
                     {
                         label: 'Nouveau Onglet',
-                        accelerator: ShortCuts.convert(config.get('option.shortcut.no-emu.new-tab').value()),
+                        accelerator: ShortCuts.convert(settings.getSync('option.shortcut.no-emu.new-tab')),
                         click (item, focusedWindow) {
                             focusedWindow.webContents.send('newTab', {});
                         }
@@ -118,14 +120,14 @@ class MenuTemplate {
                 submenu: [
                     {
                         label: 'Montret Onglet Précédent',
-                        accelerator: ShortCuts.convert(config.get('option.shortcut.no-emu.prev-tab').value()),
+                        accelerator: ShortCuts.convert(settings.getSync('option.shortcut.no-emu.prev-tab')),
                         click (item, focusedWindow) {
                             focusedWindow.webContents.send('switchTab', 'prev');
                         }
                     },
                     {
                         label: 'Montret Onglet Suivant',
-                        accelerator: ShortCuts.convert(config.get('option.shortcut.no-emu.next-tab').value()),
+                        accelerator: ShortCuts.convert(settings.getSync('option.shortcut.no-emu.next-tab')),
                         click (item, focusedWindow) {
                             focusedWindow.webContents.send('switchTab', 'next');
                         }
@@ -162,7 +164,7 @@ class MenuTemplate {
                     {
                         label: 'Options',
                         click (item, focusedWindow) {
-                            require('./Option').init(focusedWindow, config)
+                            require('./Option').init(focusedWindow)
                         }
                     }
                 ]

@@ -6,21 +6,22 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 const url = require('url');
-const jsonfile = require('jsonfile');
+const settings = require('electron-settings');
 
 const Emulator = require('./Emulator');
 const MessageBox = require('./MessageBox');
 
 class Option {
 
-    static init (winParent, config) {
+    static init (winParent) {
 
         if(this.winOption){
             this.winOption.focus();
             return;
         }
 
-        this.config = config;
+        this.settings = settings;
+
         this.winOption = new BrowserWindow({
             width: 710,
             height: 500,
@@ -42,7 +43,7 @@ class Option {
 
     static save(){
         this.winOption.close();
-        Emulator.reloadConfig();
+        Emulator.reloadSettings();
     }
 }
 

@@ -4,6 +4,7 @@ const pkg = require('./../../package.json');
 const low = require('lowdb');
 const fileAsync = require('lowdb/lib/file-async');
 const os = require('os');
+const settings = require('electron-settings');
 
 const MenuTemplate = require('./MenuTemplate');
 const Game = require('./Game');
@@ -17,13 +18,15 @@ class Emulator {
 
     static init () {
         var self = this;
-        Emulator.config = low(app.getAppPath()+'/config.json', {
-            storage: fileAsync
-        });
-        Emulator.devMode = this.config.get('option.general.developer-mode').value();
+
+        /*if(!settings.hasSync('option')){
+            settings.resetToDefaultsSync();
+        }*/
+
         Emulator.gameWindows = [];
         Emulator.version = pkg.version;
         Emulator.webSite = 'http://dofustouch.no-emu.com';
+        Emulator.devMode = settings.getSync('option.general.developer-mode');
 
         require('./Updater').init(() => {
             Emulator.setMenu();
@@ -31,7 +34,7 @@ class Emulator {
         });
     }
 
-    static reloadConfig(){
+    static reloadSettings(){
         Emulator.gameWindows.forEach((game) => {
             game.shortCuts.reload();
         });
@@ -43,7 +46,7 @@ class Emulator {
     static openGameWindow () {
 
         // instance window game
-        let game = new Game(Emulator.config, Emulator.devMode, Emulator);
+        let game = new Game(Emulator.devMode, Emulator);
 
         // start window game
         game.init();
@@ -63,7 +66,7 @@ class Emulator {
     }
 
     static setMenu  () {
-        let template = MenuTemplate.build(Emulator.config, Emulator);
+        let template = MenuTemplate.build(Emulator);
         const menu = Menu.buildFromTemplate(template);
         Menu.setApplicationMenu(menu);
     }

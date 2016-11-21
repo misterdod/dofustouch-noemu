@@ -1,24 +1,24 @@
 const {BrowserWindow} = require('electron');
+const settings = require('electron-settings');
+
 const ShortCuts = require('./ShortCuts');
 const Emulator = require('./Emulator');
 
 class Game {
-    constructor(config, devMode, Emulator){
+    constructor(devMode, Emulator){
         this.Emulator = Emulator;
         this.devMode = devMode;
-        this.config = config;
         this.win = new BrowserWindow({
-            width: parseInt(this.config.get('option.general.resolution').value().split(';')[0]),
-            height: parseInt(this.config.get('option.general.resolution').value().split(';')[1]),
+            width: parseInt(settings.getSync('option.general.resolution').split(';')[0]),
+            height: parseInt(settings.getSync('option.general.resolution').split(';')[1]),
             title : 'DofusTouch-NE',
             useContentSize: true,
             center: true,
             webPreferences: {
-                pageVisibility: true,
-                zoomFactor: 1.0
+                backgroundThrottling: false
             }
         });
-        this.shortCuts = new ShortCuts(this.win, this.config);
+        this.shortCuts = new ShortCuts(this.win);
     }
 
     init(){

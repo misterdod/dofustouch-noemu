@@ -10,15 +10,13 @@ export class Option {
         this.option  = require('electron').remote.require('./Option');
         this.emulator = require('electron').remote.require('./Emulator');
         this.$form = $('#right-menu');
-
-        this.data = this.option.config.value();
         this.init();
     }
 
     init(){
         this.keyBinder();
         this.formBinder();
-        this.loadConfig();
+        this.loadSettings();
     }
 
     formBinder(){
@@ -31,7 +29,7 @@ export class Option {
 
             console.log(obj);
 
-            that.saveConfig(obj);
+            that.saveSettings(obj);
 
             return false;
         });
@@ -90,33 +88,35 @@ export class Option {
         });
     }
 
-    saveConfig(obj){
+    saveSettings(obj){
         // delete old array
-        this.option.config.set('option.shortcut.no-emu.tabs', []).value();
-        this.option.config.set('option.shortcut.spell', []).value();
-        this.option.config.set('option.shortcut.item', []).value();
+        this.option.settings.setSync('option.shortcut.no-emu.tabs', []);
+        this.option.settings.setSync('option.shortcut.spell', []);
+        this.option.settings.setSync('option.shortcut.item', []);
 
         obj.forEach((element, index) => {
-            if(Array.isArray(this.option.config.get('option.'+element.name).value())){
-                this.option.config.get('option.'+element.name).push(element.value).value();
+            if(Array.isArray(this.option.settings.getSync('option.'+element.name))){
+                console.log('hello');
+                let newVal = this.option.settings.getSync('option.'+element.name);
+                newVal.push(element.value);
+                this.option.settings.setSync('option.'+element.name, newVal);
             }else{
-                console.log(element.value);
-                this.option.config.set('option.'+element.name, element.value).value();
+                this.option.settings.setSync('option.'+element.name, element.value);
             }
         });
 
         this.option.save();
     }
 
-    loadConfig(){
+    loadSettings(){
 
-        let properties = this.getPropertiesByKey(this.option.config.get('option').value(), '');
+        let properties = this.getPropertiesByKey(this.option.settings.getSync('option'), '');
 
         properties.forEach((propertie) => {
             let pathprop = propertie.split('.');
 
             // Value of option
-            let value = this.option.config.get('option').value();
+            let value = this.option.settings.getSync('option');
             pathprop.forEach((prop) => {
                 value = value[prop];
             });
