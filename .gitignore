@@ -1,4 +1,5 @@
 views/bower_components/
+src/static/bower_components/
 node_modules/
 .idea/
 dist/
