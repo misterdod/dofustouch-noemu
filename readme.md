@@ -16,6 +16,7 @@ $ git clone https://github.com/scapain/dofustouch-noemu.git
 $ cd dofustouch-noemu
 $ npm install
 ```
+/!\ Vous devez ensuite recupérer le fichier script.js (code source dofustouch) et le placer dans src/browser/
 
 ## Lancement :
 ```sh
@@ -26,6 +27,14 @@ $ npm start
 ```sh
 $ npm run build
 ```
+
+Vous pouvez chosir votre distribution dans le fichier build.js à la ligne
+```js
+platform: ["linux","darwin","win"],
+arch: "all", //x64 ou ia32
+```
+Attention vous devez utiliser wine pour build une version windows sur Linux ou OS X.
+Ou utiliser notre image docker qui est configuré pour build sur toutes les plateformes (cf section Docker)
 
 ### Docker :
 ```sh
@@ -42,7 +51,6 @@ $ tar czvf update.tar.gz ./node_modules ./src ./package.json ./conf.json
 
  - Auto-Save possibilité de sauvegarder une combinaison d'onglet
  - Raccourci pour aller sur l'onglet actif (onglet sur le quel c'est au tour du joueur)
- - Déplacement circulaire entre les onglets
 
 License
 ----
