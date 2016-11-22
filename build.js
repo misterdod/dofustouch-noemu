@@ -16,7 +16,6 @@ builder.build({
                 "src/**/*",
                 "node_modules/**/*",
                 "package.json",
-                "config.json",
                 "LICENCE",
                 "update.sh",
                 "update.bat",
