@@ -28,13 +28,13 @@ $ npm start
 $ npm run build
 ```
 
-Vous pouvez chosir votre distribution dans le fichier build.js à la ligne
+Vous pouvez choisir votre distribution dans le fichier build.js à la ligne
 ```js
 platform: ["linux","darwin","win"],
 arch: "all", //x64 ou ia32
 ```
 Attention vous devez utiliser wine pour build une version windows sur Linux ou OS X.
-Ou utiliser notre image docker qui est configuré pour build sur toutes les plateformes (cf section Docker)
+Vous pouvez sinon utiliser notre image docker qui est configuré pour build sur toutes les plateformes (cf section Docker)
 
 ### Docker :
 ```sh
