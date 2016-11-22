@@ -24,7 +24,7 @@ $ npm start
 
 ## Build Distribution :
 ```sh
-$ npm run dist
+$ npm run build
 ```
 
 ### Docker :
