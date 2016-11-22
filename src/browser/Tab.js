@@ -3,6 +3,7 @@ const low = require('lowdb');
 const async = require('async');
 const {app,shell} = require('electron').remote
 const {ipcRenderer} = require('electron');
+const settings = require('electron-settings');
 
 export class Tab {
     constructor(id, client){
@@ -12,7 +13,6 @@ export class Tab {
         this.name = null;
         this.window = window['Frame'+this.id];
         this.Emulator = require('electron').remote.require('./Emulator');
-        this.config = this.Emulator.config;
     }
 
     init(){
@@ -20,7 +20,7 @@ export class Tab {
     }
 
     hideShop(){
-        if(this.config.get('option.general.hidden-shop').value()){
+        if(settings.getSync('option.general.hidden-shop')){
             $(this.window.document).find('.shopBtn.Button').parent().hide();
         }else{
             $(this.window.document).find('.shopBtn.Button').parent().show();
@@ -107,28 +107,28 @@ export class Tab {
 
     unbindShortCut(){
 
-        this.window.key.unbind(this.config.get('option.shortcut.diver.end-turn').value());
+        this.window.key.unbind(settings.getSync('option.shortcut.diver.end-turn'));
 
         // spell
-        async.forEachOf(this.config.get('option.shortcut.spell').value(), (shortcut, index, callback) =>{
+        async.forEachOf(settings.getSync('option.shortcut.spell'), (shortcut, index, callback) =>{
             this.window.key.unbind(shortcut);
             callback();
         });
 
         // item
-        async.forEachOf(this.config.get('option.shortcut.item').value(), (shortcut, index, callback) =>{
+        async.forEachOf(settings.getSync('option.shortcut.item'), (shortcut, index, callback) =>{
             this.window.key.unbind(shortcut);
             callback();
         });
 
         //diver
-        async.forEachOf(this.config.get('option.shortcut.diver').value(), (shortcut, key, callback) =>{
+        async.forEachOf(settings.getSync('option.shortcut.diver'), (shortcut, key, callback) =>{
             this.window.key.unbind(shortcut);
             callback();
         });
 
         //interface
-        async.forEachOf(this.config.get('option.shortcut.interface').value(), (shortcut, key, callback) =>{
+        async.forEachOf(settings.getSync('option.shortcut.interface'), (shortcut, key, callback) =>{
             this.window.gui.menuBar._icons._childrenList.forEach((element, index) => {
                 if(element.id.toUpperCase() == key.toUpperCase()){
                     this.window.key.unbind(shortcut);
@@ -140,9 +140,8 @@ export class Tab {
     }
 
     bindShortCut(){
-        console.log(this.config.get('option.shortcut.diver.end-turn').value());
         // end turn
-        this.window.key(this.config.get('option.shortcut.diver.end-turn').value(), () => {
+        this.window.key(settings.getSync('option.shortcut.diver.end-turn'), () => {
             //console.log('end turn');
             //this.window.turnReady.tap();
             this.window.gui.fightManager.finishTurn()
@@ -150,7 +149,7 @@ export class Tab {
 
 
         // spell
-        async.forEachOf(this.config.get('option.shortcut.spell').value(), (shortcut, index, callback) =>{
+        async.forEachOf(settings.getSync('option.shortcut.spell'), (shortcut, index, callback) =>{
             this.window.key(shortcut, () => {
                 this.window.gui.shortcutBar.panels.spell.slotList[index].tap();
             });
@@ -158,7 +157,7 @@ export class Tab {
         });
 
         // item
-        async.forEachOf(this.config.get('option.shortcut.item').value(), (shortcut, index, callback) =>{
+        async.forEachOf(settings.getSync('option.shortcut.item'), (shortcut, index, callback) =>{
             this.window.key(shortcut, () => {
                 this.window.gui.shortcutBar.panels.item.slotList[index].tap();
             });
@@ -166,7 +165,7 @@ export class Tab {
         });
 
         //diver
-        async.forEachOf(this.config.get('option.shortcut.diver').value(), (shortcut, key, callback) =>{
+        async.forEachOf(settings.getSync('option.shortcut.diver'), (shortcut, key, callback) =>{
             this.window.key(shortcut, () => {
 
             });
@@ -174,7 +173,7 @@ export class Tab {
         });
 
         //interface
-        async.forEachOf(this.config.get('option.shortcut.interface').value(), (shortcut, key, callback) =>{
+        async.forEachOf(settings.getSync('option.shortcut.interface'), (shortcut, key, callback) =>{
             this.window.gui.menuBar._icons._childrenList.forEach((element, index) => {
                 if(element.id.toUpperCase() == key.toUpperCase()){
                     this.window.key(shortcut, () => {
