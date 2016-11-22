@@ -69,15 +69,25 @@ export class Client {
     switchTab(action){
         if (Number.isInteger(action)) {
             var i = action;
-            if (i <= $('#navTabs li').length)
-            $($('#navTabs li')[i]).children('a').first().click();
+            if (i <= $('#navTabs li.tab2').length){
+                $($('#navTabs li.tab2')[i]).children('a').first().click();
+            }
         } else {
             switch (action) {
                 case 'prev':
-                $('li.active').prev().children('a').first().click();
+                if($('li.active').prev('li.tab2').length == 0){
+                    console.log($('#navTabs li.tab2').length);
+                    $($('#navTabs li.tab2')[$('#navTabs li.tab2').length-1]).children('a').first().click();
+                }else{
+                    $('li.active').prev('li.tab2').children('a').first().click();
+                }
                 break;
                 case 'next':
-                $('li.active').next().children('a').first().click();
+                if($('li.active').next('li.tab2').length == 0){
+                    $($('#navTabs li.tab2')[0]).children('a').first().click();
+                }else{
+                    $('li.active').next('li.tab2').children('a').first().click();
+                }
                 break;
             }
         }
