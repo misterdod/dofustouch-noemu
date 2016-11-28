@@ -4,8 +4,8 @@ const Platform = builder.Platform
 
 // Promise is returned
 builder.build({
-    platform: ["linux","darwin","win"],
-    arch: "all",
+    platform: ["win"],
+    arch: "x64",
     devMetadata: {
         "build":{
             "copyright" : "Daniel LEFEVBRE",
@@ -18,9 +18,11 @@ builder.build({
                 "package.json",
                 "LICENCE",
                 "update.sh",
-                "update.bat",
-                "extract.vbs",
-                "getadmin.vbs"
+            ],
+            "extraFiles":[
+                "Ionic.Zip.dll",
+                "Newtonsoft.Json.dll",
+                "Updater.exe"
             ],
             "mac": {
                 "target" : ["default"],

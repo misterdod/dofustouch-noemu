@@ -4,16 +4,34 @@ const url = require('url');
 const os = require('os');
 const Emulator = require('./Emulator');
 const settings = require('electron-settings');
+const electronEjs = require('electron-ejs');
+const i18n = require('i18n');
+const commandLineArgs = require('command-line-args');
 
+// Comand line for electron
 app.commandLine.appendSwitch('ignore-gpu-blacklist', 'true');
 app.commandLine.appendSwitch("disable-renderer-backgrounding");
+
+// Configure Internationalization
+i18n.configure({
+    locales:['en', 'de'],
+    directory: app.getAppPath() + '/locales'
+});
+
+// Command Line Argument
+const optionDefinitions = [
+  { name: 'update', alias: 'u', type: Boolean },
+  { name: 'changelog', alias: 'l', type: Boolean },
+  { name: 'relaunch', alias: 'r', type: Boolean },
+];
+const options = commandLineArgs(optionDefinitions);
 
 settings.defaults({
     "option" :{
         "general": {
             "hidden-shop": false,
             "developer-mode": false,
-            "resolution": "1128;649"
+            "resolution": "1280;720"
         },
         "shortcut": {
             "no-emu": {
@@ -133,7 +151,7 @@ settings.defaults({
 var win;
 
 app.on('ready', function () {
-    Emulator.init(win);
+    Emulator.init(options);
 });
 
 app.on('window-all-closed', () => {
@@ -142,10 +160,10 @@ app.on('window-all-closed', () => {
     //}
 });
 
-app.on('activate', () => {
+/*app.on('activate', () => {
     if (win === null) {
         Emulator.init(win);
     }
-});
+});*/
 
 global.process = process;

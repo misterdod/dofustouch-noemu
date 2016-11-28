@@ -16,13 +16,10 @@ class Emulator {
         return `file://${__dirname}/../view/`+file;
     }
 
-    static init () {
+    static init (options) {
         var self = this;
 
-        /*if(!settings.hasSync('option')){
-            settings.resetToDefaultsSync();
-        }*/
-
+        Emulator.options = options;
         Emulator.gameWindows = [];
         Emulator.version = pkg.version;
         Emulator.webSite = 'http://dofustouch.no-emu.com';

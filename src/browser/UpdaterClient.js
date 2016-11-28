@@ -45,71 +45,45 @@ class UpdaterClient {
     }
 
     start(){
-        console.log(Updater.platform);
-        this.downloadUpdate();
+        //this.downloadUpdate();
     }
 
     installUpdate(){
+      this.updateProgressBarIndice('Installation de la mis à jour...');
+      Updater.execUpdate();
+    }
 
-        this.updateProgressBarIndice('Installation de la mis à jour...');
+  downloadUpdate(){
 
-        Updater.execUpdate();
+      progress(request(this.dataFile.file), {})
+      .on('progress', (state) => {
+          let percent = Math.round(state.percentage * 100);
+          this.updateProgressBar(percent);
+          this.updateProgressBarIndice(UpdaterClient.formatDownloadUnit(state.size.transferred)+' / '+UpdaterClient.formatDownloadUnit(state.size.total))
+      })
+      .on('error', (err) =>{
+          this.updateProgressBarIndice('<span class="text-error">Impossible de télécharger la mise à jour ! Veuillez réessayer ultérieurement</span>');
+      })
+      .on('end', () =>{
+          this.updateProgressBar(100);
+          this.updateProgressBarIndice('Mise à jour terminée');
+      })
+      .pipe(this.file);
 
-        // remove old source
-        /*fs.unlinkSync(`${__dirname}/../package.json`);
-        fsExtra.rmrfSync(`${__dirname}/../views`);
-        fsExtra.rmrfSync(`${__dirname}/../src`);
+      this.file.addListener('finish', ()=>{
+          this.installUpdate();
+      });
+  }
 
-        console.log('start extract');
+  updateProgressBar(percent){
+      this.progressBar.css({
+          width: percent + '%',
+          ariaValuenow: percent
+      });
+  }
 
-        let log = console.log;
-
-        // extract update
-        fs.createReadStream(this.toSaveFilePath)
-        .on('error', log)
-        .pipe(zlib.Unzip())
-        .pipe(tar.Extract({ path: `${__dirname}/../`,strip: 0 }))
-        .on('end', () => {
-        // delete update file
-        fs.unlinkSync(this.toSaveFilePath);
-
-        // restart the app
-        app.relaunch({args: process.argv.slice(1).concat(['--relaunch'])})
-        app.exit(0)
-    });*/
-}
-
-downloadUpdate(){
-
-    progress(request(this.dataFile.file), {})
-    .on('progress', (state) => {
-        let percent = Math.round(state.percentage * 100);
-        this.updateProgressBar(percent);
-        this.updateProgressBarIndice(UpdaterClient.formatDownloadUnit(state.size.transferred)+' / '+UpdaterClient.formatDownloadUnit(state.size.total))
-    })
-    .on('error', (err) =>{
-        this.updateProgressBarIndice('<span class="text-error">Impossible de télécharger la mise à jour ! Veuillez réessayer ultérieurement</span>');
-    })
-    .on('end', () =>{
-        this.updateProgressBar(100);
-        this.updateProgressBarIndice('Mise à jour terminée');
-    })
-    .pipe(this.file);
-
-    this.file.addListener('finish', ()=>{
-        this.installUpdate();
-    });
-}
-
-updateProgressBar(percent){
-    this.progressBar.css({
-        width: percent + '%',
-        ariaValuenow: percent
-    });
-}
-
-updateProgressBarIndice(text){
-    this.progressBarIndice.html(text);
-}
+  updateProgressBarIndice(text){
+      this.progressBarIndice.html(text);
+  }
 
 }
