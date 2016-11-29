@@ -5,6 +5,7 @@ echo Terminaison des instances de DofusTouch-NE lancées
 #pkill dofustouch-ne
 echo Suppression des vieux fichiers
 rm -rf $1/package.json
+rm -rf $1/CHANGELOG.md
 rm -rf $1/src
 rm -rf $1/node_modules
 echo Extraction des nouveaux fichiers

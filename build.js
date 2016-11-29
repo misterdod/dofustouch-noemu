@@ -4,8 +4,8 @@ const Platform = builder.Platform
 
 // Promise is returned
 builder.build({
-    platform: ["win"],
-    arch: "x64",
+    platform: ["darwin"],
+    arch: "all",
     devMetadata: {
         "build":{
             "copyright" : "Daniel LEFEVBRE",
@@ -18,6 +18,7 @@ builder.build({
                 "package.json",
                 "LICENCE",
                 "update.sh",
+                "CHANGELOG.md",
             ],
             "extraFiles":[
                 "Ionic.Zip.dll",

@@ -1,8 +1,6 @@
 const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const electronLocalshortcut = require('electron-localshortcut');
 const pkg = require('./../../package.json');
-const low = require('lowdb');
-const fileAsync = require('lowdb/lib/file-async');
 const os = require('os');
 const settings = require('electron-settings');
 
