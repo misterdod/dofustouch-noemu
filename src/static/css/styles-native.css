@@ -905,19 +905,22 @@ body input {
     top: 0;
     left: 0;
     z-index: 170;
-    padding: 3px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 8px;
     border-radius: 5px;
-    max-width: 300px;
     background-color: rgba(0,0,0,0.8);
-    pointer-events: none
+    pointer-events: none;
+    -webkit-transition: opacity 150ms ease-out
 }
 
 .TooltipBox.transition {
-    -webkit-transition: -webkit-transform 200ms ease-out
+    overflow: hidden
 }
 
 .TooltipBox .content {
-    padding: 5px;
+    position: absolute;
     white-space: pre-wrap
 }
 
@@ -4761,6 +4764,10 @@ body input {
     -webkit-mask-repeat: no-repeat
 }
 
+.playerPoints .lifeGauge.shield {
+    background: #b912b0
+}
+
 .playerPoints .lifeGauge {
     position: absolute;
     bottom: 0;
@@ -5524,142 +5531,6 @@ body input {
 
 .memberTooltip .stat {
     margin: 2px 0
-}
-
-.ColorPicker {
-    position: relative
-}
-
-.ColorPicker .tintWrapper,.ColorPicker .lumWrapper {
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    vertical-align: top
-}
-
-.ColorPicker .tintCanvas,.ColorPicker .lumCanvas {
-    z-index: 1;
-    cursor: pointer
-}
-
-.ColorPicker .lumCanvas {
-    margin-left: 10px
-}
-
-.ColorPicker .tintPicker,.ColorPicker .lumPicker {
-    z-index: 2;
-    position: absolute;
-    pointer-events: none
-}
-
-.ColorPicker .tintPicker {
-    width: 14px;
-    height: 14px;
-    left: -7px;
-    top: -7px;
-    background-image: url("../ui/cursors/cross.png")
-}
-
-.ColorPicker .lumPicker {
-    height: 10px;
-    left: 10px;
-    top: -5px;
-    right: 0
-}
-
-.ColorPicker .lumPicker .triangle {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-size: 100% 100%
-}
-
-.ColorPicker .lumPicker .triangle.black {
-    background-image: url("../ui/cursors/doubleTriangle.png")
-}
-
-.ColorPicker .lumPicker .triangle.white {
-    background-image: url("../ui/cursors/doubleTriangleWhite.png")
-}
-
-@keyframes blinker {
-    50% {
-        opacity: .4
-    }
-}
-
-.HexSelector {
-    z-index: 100;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    position: absolute;
-    width: 225px;
-    height: auto;
-    padding: 8px;
-    text-align: center
-}
-
-.HexSelector:before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    border-style: solid;
-    border-width: 10px;
-    -webkit-border-image: url("../ui/container.png") 20;
-    border-image: url("../ui/container.png") 20 fill;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box
-}
-
-.HexSelector * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box
-}
-
-.HexSelector .button {
-    display: inline-block;
-    height: 39px;
-    vertical-align: middle;
-    background-size: 100% 100%
-}
-
-.HexSelector .hexLabel {
-    display: inline-block;
-    height: 35px;
-    margin-left: 10px
-}
-
-.HexSelector .closeBtn {
-    background-image: url('../ui/fight/btn_cancel.png')
-}
-
-.HexSelector .confirmBtn {
-    background-image: url('../ui/fight/btn_valid.png')
-}
-
-.HexSelector .confirmBtn,.HexSelector .closeBtn {
-    display: inline-block;
-    vertical-align: middle;
-    width: 35px;
-    height: 39px;
-    background-size: 100% 100%
-}
-
-.HexSelector .hexInputBox {
-    display: inline-block;
-    width: 100px;
-    height: 35px;
-    text-align: left;
-    margin-right: 10px
 }
 
 @keyframes blinker {
@@ -7852,7 +7723,11 @@ body input {
 }
 
 .StorageViewer .podContainer .progressBarContainer .label {
-    width: 50px
+    margin-right: 10px
+}
+
+.StorageViewer .podContainer .progressBarContainer .ProgressBar {
+    flex: 1
 }
 
 .StorageViewer .PresetsBox {
@@ -8148,26 +8023,37 @@ body input {
     }
 }
 
-.window.adminConsoleWindow .upDownContainer {
+.window.adminConsoleWindow .windowBody {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.window.adminConsoleWindow .topDom {
+    height: 85px
+}
+
+.window.adminConsoleWindow .topDom .upDownContainer {
     text-align: center
 }
 
-.window.adminConsoleWindow .upDownContainer .upAndDown {
+.window.adminConsoleWindow .topDom .upDownContainer .upAndDown {
     display: inline-block;
-    margin: 0 20px;
-    width: 44%
+    margin: 0 2px;
+    width: 31%
 }
 
-.window.adminConsoleWindow .cmdInputBar {
+.window.adminConsoleWindow .topDom .cmdInputBar {
     width: 100%;
     height: 20%
 }
 
-.window.adminConsoleWindow .cmdInput {
+.window.adminConsoleWindow .topDom .cmdInput {
     width: 98%
 }
 
-.window.adminConsoleWindow .buttonSend {
+.window.adminConsoleWindow .topDom .buttonSend {
     width: 15%;
     height: 15px
 }
@@ -8190,10 +8076,8 @@ body input {
 }
 
 .window.adminConsoleWindow .logBox {
-    width: 100%;
-    height: 82%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    -webkit-flex: 1;
+    flex: 1;
     -webkit-user-select: initial;
     text-align: left;
     font-size: 13px
@@ -11195,7 +11079,7 @@ body input {
 }
 
 .ItemBox .infoContainer .topRightInfoContainer .itemInfoPanels .Table .row.exotic {
-    color: #0342a1
+    color: #9ab3e5
 }
 
 .ItemBox .actionContainer {
@@ -11969,45 +11853,52 @@ body input {
     flex-direction: column
 }
 
-.window.EstateForSellWindow .container3 .Table {
+.window.EstateForSellWindow .container3 .TableV2 {
     -webkit-flex: 1;
     flex: 1;
     border-bottom: 2px solid black
 }
 
-.window.EstateForSellWindow .container3 .Table .container.content .row {
-    min-height: 34px;
-    height: auto
-}
-
-.window.EstateForSellWindow .container3 .Table .container .row .col {
+.window.EstateForSellWindow .container3 .TableV2 .row .col {
     padding-left: 10px
 }
 
-.window.EstateForSellWindow .container3 .Table .container .row .col:nth-child(1) {
+.window.EstateForSellWindow .container3 .TableV2 .row .col:nth-child(1) {
     min-width: 306px;
     width: 46%
 }
 
-.window.EstateForSellWindow .container3 .Table .container .row .col:nth-child(2) {
+.window.EstateForSellWindow .container3 .TableV2 .row .col:nth-child(1) .sortBtn {
+    left: unset
+}
+
+.window.EstateForSellWindow .container3 .TableV2 .row .col:nth-child(2) {
     min-width: 148px;
     width: 34%
 }
 
-.window.EstateForSellWindow .container3 .Table .container .row .col:nth-child(3) {
+.window.EstateForSellWindow .container3 .TableV2 .row .col:nth-child(3) {
     min-width: 105px;
     width: 20%
 }
 
-.window.EstateForSellWindow .container3 .Table .container .row .col:nth-child(4) {
+.window.EstateForSellWindow .container3 .TableV2 .row .col:nth-child(4) {
     padding: 0 5px;
     min-width: 45px
 }
 
-.window.EstateForSellWindow .container3 .Table .container .row .col:nth-child(4) .button {
+.window.EstateForSellWindow .container3 .TableV2 .row .col:nth-child(4) .button {
     padding: 0;
     height: 30px;
     line-height: 2px
+}
+
+.window.EstateForSellWindow .container3 .TableV2 .row .col:nth-child(4) .info {
+    border: none;
+    background: url("../ui/btn_etc_square.png") no-repeat;
+    background-size: contain;
+    height: 50%;
+    width: 50%
 }
 
 .window.EstateForSellWindow .navigator {
@@ -15538,6 +15429,142 @@ body input {
     width: 200px
 }
 
+.ColorPicker {
+    position: relative
+}
+
+.ColorPicker .tintWrapper,.ColorPicker .lumWrapper {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    vertical-align: top
+}
+
+.ColorPicker .tintCanvas,.ColorPicker .lumCanvas {
+    z-index: 1;
+    cursor: pointer
+}
+
+.ColorPicker .lumCanvas {
+    margin-left: 10px
+}
+
+.ColorPicker .tintPicker,.ColorPicker .lumPicker {
+    z-index: 2;
+    position: absolute;
+    pointer-events: none
+}
+
+.ColorPicker .tintPicker {
+    width: 14px;
+    height: 14px;
+    left: -7px;
+    top: -7px;
+    background-image: url("../ui/cursors/cross.png")
+}
+
+.ColorPicker .lumPicker {
+    height: 10px;
+    left: 10px;
+    top: -5px;
+    right: 0
+}
+
+.ColorPicker .lumPicker .triangle {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: 100% 100%
+}
+
+.ColorPicker .lumPicker .triangle.black {
+    background-image: url("../ui/cursors/doubleTriangle.png")
+}
+
+.ColorPicker .lumPicker .triangle.white {
+    background-image: url("../ui/cursors/doubleTriangleWhite.png")
+}
+
+@keyframes blinker {
+    50% {
+        opacity: .4
+    }
+}
+
+.HexSelector {
+    z-index: 100;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    width: 225px;
+    height: auto;
+    padding: 8px;
+    text-align: center
+}
+
+.HexSelector:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    border-style: solid;
+    border-width: 10px;
+    -webkit-border-image: url("../ui/container.png") 20;
+    border-image: url("../ui/container.png") 20 fill;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.HexSelector * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.HexSelector .button {
+    display: inline-block;
+    height: 39px;
+    vertical-align: middle;
+    background-size: 100% 100%
+}
+
+.HexSelector .hexLabel {
+    display: inline-block;
+    height: 35px;
+    margin-left: 10px
+}
+
+.HexSelector .closeBtn {
+    background-image: url('../ui/fight/btn_cancel.png')
+}
+
+.HexSelector .confirmBtn {
+    background-image: url('../ui/fight/btn_valid.png')
+}
+
+.HexSelector .confirmBtn,.HexSelector .closeBtn {
+    display: inline-block;
+    vertical-align: middle;
+    width: 35px;
+    height: 39px;
+    background-size: 100% 100%
+}
+
+.HexSelector .hexInputBox {
+    display: inline-block;
+    width: 100px;
+    height: 35px;
+    text-align: left;
+    margin-right: 10px
+}
+
 @keyframes blinker {
     50% {
         opacity: .4
@@ -16370,16 +16397,11 @@ body input {
 
 .window.ItemSetsWindow .windowBody .leftCol {
     -webkit-flex: 1;
-    flex: 1;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column
+    flex: 1
 }
 
 .window.ItemSetsWindow .windowBody .leftCol .itemListBox {
-    -webkit-flex: 2;
-    flex: 2;
+    height: 43px;
     padding: 10px
 }
 
@@ -16403,13 +16425,12 @@ body input {
 }
 
 .window.ItemSetsWindow .windowBody .leftCol .ItemBox {
-    -webkit-flex: 15;
-    flex: 15;
-    width: 100%
+    -webkit-flex: 1;
+    flex: 1
 }
 
 .window.ItemSetsWindow .windowBody .leftCol .ItemBox .itemDescriptionContainer {
-    height: 200px
+    height: 192px
 }
 
 .window.ItemSetsWindow .windowBody .rightCol {
@@ -16422,8 +16443,7 @@ body input {
 }
 
 .window.ItemSetsWindow .windowBody .rightCol .selectorContainer {
-    -webkit-flex: 3;
-    flex: 3;
+    height: 80px;
     padding: 10px
 }
 
@@ -16440,9 +16460,9 @@ body input {
     margin: 2px 12px
 }
 
-.window.ItemSetsWindow .windowBody .rightCol .tableContainer {
-    -webkit-flex: 15;
-    flex: 15;
+.window.ItemSetsWindow .windowBody .rightCol .TableV2 {
+    -webkit-flex: 1;
+    flex: 1;
     position: relative;
     display: -webkit-flex;
     display: flex;
@@ -16451,7 +16471,7 @@ body input {
     padding: 10px
 }
 
-.window.ItemSetsWindow .windowBody .rightCol .tableContainer:before {
+.window.ItemSetsWindow .windowBody .rightCol .TableV2:before {
     content: "";
     width: 100%;
     height: 100%;
@@ -16468,12 +16488,7 @@ body input {
     box-sizing: border-box
 }
 
-.window.ItemSetsWindow .windowBody .rightCol .tableContainer .Table.bonusTable {
-    -webkit-flex: 1;
-    flex: 1
-}
-
-.window.ItemSetsWindow .windowBody .rightCol .tableContainer .Table.bonusTable .row.negative {
+.window.ItemSetsWindow .windowBody .rightCol .TableV2 .row.negative {
     color: #f00
 }
 
@@ -24613,6 +24628,20 @@ body input {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 10% 100%
+}
+
+#dofusBody .loginScreen.christmasSkin {
+    background-color: #838bca;
+    background: #838bca;
+    background: -webkit-linear-gradient(top, #132c80 0, #cbd1f3 100%);
+    background: linear-gradient(to bottom, #132c80 0, #cbd1f3 100%)
+}
+
+#dofusBody .loginScreen.christmasSkin.backgroundImage {
+    background-image: url('../ui/login/login_bg_christmas.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 100%
 }
 
 #dofusBody .loginScreen .webGlUnsupported {

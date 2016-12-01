@@ -3,4 +3,4 @@ src/static/bower_components/
 node_modules/
 .idea/
 dist/
-src/browser/script.js
+#src/browser/script.js

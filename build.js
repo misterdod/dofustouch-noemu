@@ -1,10 +1,12 @@
 "use strict"
-const builder = require("electron-builder")
-const Platform = builder.Platform
+const builder = require("electron-builder");
+const Platform = builder.Platform;
+
+console.log('start');
 
 // Promise is returned
 builder.build({
-    platform: ["win"],
+    platform: ["linux"],
     arch: "x64",
     devMetadata: {
         "build":{
@@ -18,6 +20,7 @@ builder.build({
                 "package.json",
                 "LICENCE",
                 "update.sh",
+                "CHANGELOG.md",
             ],
             "extraFiles":[
                 "Ionic.Zip.dll",

@@ -51,49 +51,48 @@ class Updater {
 
                     if (Updater.responseBody.version || Emulator.devMode) {
 
-                        if (Updater.responseBody.new) {
+                        if (Updater.responseBody.version != Emulator.version /*|| Emulator.devMode*/) {
 
-                            dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
-                                type: 'info',
-                                title: 'Nouvelle version : ' + Updater.responseBody.version,
-                                message: 'Une nouvelle version est disponible de DofusTouchNoEmu, vous devez la télécharger depuis notre site!\n',
-                                buttons: ['Se rendre sur le site', 'Ignorer']
-                            }, (buttonIndex) => {
-                                if(buttonIndex == 0){
-                                    shell.openExternal("http://dofustouch.no-emu.com/#download")
-                                }else{
-                                    Updater.startGame();
-                                }
-                            });
-                        } else {
+                            if (Updater.responseBody.new) {
 
-                            if (Updater.responseBody.version != Emulator.version /*|| Emulator.devMode*/) {
+                                dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
+                                    type: 'info',
+                                    title: 'Nouvelle version : ' + Updater.responseBody.version,
+                                    message: 'Une nouvelle version est disponible de DofusTouchNoEmu, vous devez la télécharger depuis notre site!\n',
+                                    buttons: ['Se rendre sur le site', 'Ignorer']
+                                }, (buttonIndex) => {
+                                    if(buttonIndex == 0){
+                                        shell.openExternal("http://dofustouch.no-emu.com/#download")
+                                    }else{
+                                        Updater.startGame();
+                                    }
+                                });
+                            } else {
+
                                 switch(process.platform){
                                     case 'win32':
-                                        spawn("Updater.exe", {
-                                            detached: true
-                                        });
-                                        app.quit();
+                                    spawn("Updater.exe", {
+                                        detached: true
+                                    });
+                                    app.quit();
                                     break;
                                     default:
-                                        dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
-                                            type: 'info',
-                                            title: 'Nouvelle version : ' + Updater.responseBody.version,
-                                            message: 'Une nouvelle version est disponible de DofusTouchNoEmu !\n',
-                                            buttons: ['Télécharger', 'Ignorer']
-                                        }, (buttonIndex) => {
-                                            if(buttonIndex == 0){
-                                                Updater.startUpdate();
-                                            }else{
-                                                Updater.startGame();
-                                                //app.relaunch({args: process.argv.slice(1).concat(['--relaunch -l'])})
-                                                //app.exit(0)
-                                            }
-                                        });
+                                    dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
+                                        type: 'info',
+                                        title: 'Nouvelle version : ' + Updater.responseBody.version,
+                                        message: 'Une nouvelle version est disponible de DofusTouchNoEmu !\n',
+                                        buttons: ['Télécharger', 'Ignorer']
+                                    }, (buttonIndex) => {
+                                        if(buttonIndex == 0){
+                                            Updater.startUpdate();
+                                        }else{
+                                            Updater.startGame();
+                                        }
+                                    });
                                 }
-                            }else{
-                                Updater.startGame();
                             }
+                        }else{
+                            Updater.startGame();
                         }
                     } else {
                         this.failedCheckUpdates();
@@ -111,8 +110,9 @@ class Updater {
 
         exec('chmod a+x '+app.getAppPath()+'/update.sh', function(error, stdout, stderr) {
             sudo.exec(app.getAppPath()+'/update.sh '+app.getAppPath(), options, function(error, stdout, stderr) {
-                app.relaunch({args: process.argv.slice(1).concat(['--relaunch', '--changelog'])})
-                app.exit(0)
+                let args = process.argv.slice(1).concat(['--relaunch', '-l']);
+                app.relaunch({args: args});
+                app.exit(0);
             });
         });
 
@@ -124,7 +124,7 @@ class Updater {
 
         var winUpdate = new BrowserWindow({
             width: 700,
-            height: 170,
+            height: 150,
             resizable: false,
             center: true,
             parent: BrowserWindow.getFocusedWindow(),
@@ -161,8 +161,7 @@ class Updater {
 
     static init (startGame) {
         Updater.startGame = startGame;
-
-        //MessageBox.error('error', JSON.stringify(process.argv));
+        
         if(Emulator.options.changelog){
             startGame();
             return Updater.changeLog();

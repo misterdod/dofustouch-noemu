@@ -4,8 +4,8 @@ const url = require('url');
 const os = require('os');
 const Emulator = require('./Emulator');
 const settings = require('electron-settings');
-const electronEjs = require('electron-ejs');
-const i18n = require('i18n');
+//const electronEjs = require('electron-ejs');
+//const i18n = require('i18n');
 const commandLineArgs = require('command-line-args');
 
 // Comand line for electron
@@ -13,10 +13,10 @@ app.commandLine.appendSwitch('ignore-gpu-blacklist', 'true');
 app.commandLine.appendSwitch("disable-renderer-backgrounding");
 
 // Configure Internationalization
-i18n.configure({
+/*i18n.configure({
     locales:['en', 'de'],
     directory: app.getAppPath() + '/locales'
-});
+});*/
 
 // Command Line Argument
 const optionDefinitions = [

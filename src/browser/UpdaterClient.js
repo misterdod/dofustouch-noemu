@@ -45,7 +45,7 @@ class UpdaterClient {
     }
 
     start(){
-        //this.downloadUpdate();
+        this.downloadUpdate();
     }
 
     installUpdate(){

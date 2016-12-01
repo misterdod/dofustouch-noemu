@@ -44,7 +44,7 @@ $ docker-compose up
 ## Create Update :
 Seulement les dossiers src et view ainsi que le package.json peuvent êtres mis à jours via l'updater
 ```sh
-$ tar czvf update.tar.gz ./node_modules ./src ./package.json ./conf.json
+$ tar czvf update.tar.gz ./node_modules ./src ./package.json ./CHANGELOG.md
 ```
 
 ## Todos
