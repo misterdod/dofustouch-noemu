@@ -7708,10 +7708,10 @@ body input {
 .StorageViewer .podContainer .priceBox .averagePrice,.StorageViewer .podContainer .priceBox .kamas {
     -webkit-flex: 1;
     flex: 1;
-    background: url('../ui/tx_kamaimg.png') right 0 top 0 no-repeat;
-    background-size: 15px;
+    background: url('../ui/icons/kama.png') right 0 top 0 no-repeat;
+    background-size: 18px;
     text-align: right;
-    padding: 0 16px 5px 0;
+    padding: 0 22px 5px 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
@@ -8105,6 +8105,15 @@ body input {
 
 .window.adminConsoleWindow .messageFatal {
     color: red
+}
+
+.window.adminConsoleWindow .optionButton {
+    width: 35px;
+    height: 40px;
+    background-image: url("../ui/btn_option_square.png");
+    background-position: 50% 30%;
+    background-size: 33px 33px;
+    background-repeat: no-repeat
 }
 
 @keyframes blinker {
@@ -13688,9 +13697,9 @@ body input {
 }
 
 .window .AchievementsWindow .col2 .achievementsScroll .achievementsList .achievement .more .rewards .kamasXP .line .icon.kamas {
-    background-image: url('../ui/tx_kamaimg.png');
-    background-position: 4px 80%;
-    background-size: 15px;
+    background-image: url('../ui/icons/kama.png');
+    background-position: 4px 100%;
+    background-size: 18px;
     background-repeat: no-repeat
 }
 
@@ -14571,9 +14580,9 @@ body input {
 }
 
 .window .QuestsWindow .icon.kamas {
-    background-image: url('../ui/tx_kamaimg.png');
-    background-position: 2px -1px;
-    background-size: 15px;
+    background-image: url('../ui/icons/kama.png');
+    background-position: 4px 0;
+    background-size: 16px;
     background-repeat: no-repeat
 }
 
@@ -16143,7 +16152,7 @@ body input {
 }
 
 .window.houseBuySellWindow .priceContainer .currencyIcon.soft {
-    background-image: url("../ui/tx_kamaimg.png")
+    background-image: url("../ui/icons/kama.png")
 }
 
 .window.houseBuySellWindow .priceContainer .currencyIcon.hard {
@@ -16935,8 +16944,8 @@ body input {
 .window.rewardsPending .rewardKamas {
     text-align: right;
     padding-right: 22px;
-    background: url("../ui/tx_kamaimg.png") 80% 50% no-repeat;
-    background-size: 13px
+    background: url("../ui/icons/kama.png") calc(100% - 5px) 50% no-repeat;
+    background-size: 14px
 }
 
 .window.rewardsPending .collectButton {
@@ -17700,10 +17709,10 @@ body input {
     position: absolute;
     right: 0;
     top: 5px;
-    background: url("../ui/tx_kamaimg.png") right 4px top 0 no-repeat;
-    background-size: 15px;
+    background: url("../ui/icons/kama.png") 100% 0 no-repeat;
+    background-size: 18px;
     text-align: right;
-    padding-right: 20px
+    padding-right: 22px
 }
 
 @keyframes blinker {
@@ -18640,7 +18649,8 @@ body input {
 }
 
 .window.WorldMapWindow .windowBodyWrapper {
-    margin-bottom: 9px
+    margin-bottom: 9px;
+    height: 0%
 }
 
 .window.WorldMapWindow .buttonsSpace {
@@ -21245,7 +21255,7 @@ body input {
     text-align: center
 }
 
-.window.CharacterCreationWindow .nameSelector .InputBox {
+.window.CharacterCreationWindow .nameSelector .InputBoxValidated {
     display: inline-block;
     vertical-align: top;
     width: 300px;
@@ -21276,6 +21286,24 @@ body input {
     background-size: 100%;
     background-repeat: no-repeat;
     background-image: url('../ui/icons/random.png')
+}
+
+.window.CharacterCreationWindow .nameErrors {
+    z-index: 4;
+    position: relative;
+    height: 0;
+    top: -10px;
+    margin: 0 auto;
+    line-height: 16px;
+    text-align: center
+}
+
+.window.CharacterCreationWindow .nameErrors .InputBoxErrors {
+    display: inline-block;
+    width: 280px;
+    border: 1px solid #500;
+    border-radius: 8px;
+    background-color: rgba(255,0,0,0.85)
 }
 
 .window.CharacterCreationWindow .breedDescription {
@@ -21596,6 +21624,29 @@ body input {
     width: 100%;
     height: 100%;
     display: none
+}
+
+@keyframes invalid {
+    from {
+        color: #EA7329
+    }
+
+    to {
+        color: #FF3C3C
+    }
+}
+
+.InputBoxValidated.invalid {
+    animation-name: invalid;
+    animation-duration: 1000ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite
+}
+
+.InputBoxErrors {
+    padding: 5px 10px 5px 10px;
+    text-align: left;
+    white-space: pre-wrap
 }
 
 @keyframes blinker {
