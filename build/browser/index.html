@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DofusTouch-NE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.6/hammer.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../../node_modules/@angular/material/core/theming/prebuilt/indigo-pink.css" rel="stylesheet">-->
+    <!--<link href="../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="./lumen.css" >
+    <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="styles.css">
+
+
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="../../node_modules/core-js/client/shim.min.js"></script>
+    <script src="../../node_modules/zone.js/dist/zone.js"></script>
+    <script src="../../node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="../../node_modules/systemjs/dist/system.src.js"></script>
+
+    <script>
+    global.nodeRequire = function (modulePath) {
+        return require(modulePath);
+      };
+    </script>
+
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+
+  <body fxLayout="row">
+    <application fxFlex fxFill>Loading...</application>
+  </body>
+</html>
