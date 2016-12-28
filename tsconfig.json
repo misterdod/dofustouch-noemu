@@ -21,7 +21,8 @@
             "core-js",
             "node",
             "hammerjs",
-            "keymaster"
+            "keymaster",
+            "async"
         ]
     },
     "exclude": [
