@@ -25,6 +25,7 @@
       '@angular/material': 'npm:@angular/material/material.umd.js',
       '@angular/flex-layout': 'npm:@angular/flex-layout/bundles/flex-layout.umd.js',
       '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+      'async': 'npm:async/dist/async.js',
 
       // other libraries
       'rxjs':                       'npm:rxjs',
