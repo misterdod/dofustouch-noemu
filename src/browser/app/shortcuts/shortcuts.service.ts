@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class ShortCutsService {
 
     public bind(shortcut: string, window: Window, action: () => void): void {
-        (<any>window).key('ctrl+a', () => {
-            console.log('test a');
+        (<any>window).key(shortcut, () => {
+            action();
         });
     }
 
