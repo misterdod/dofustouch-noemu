@@ -57,6 +57,11 @@ export class AppComponent {
             this.addTab();
         });
 
+        // ipc close tab
+        this.ipcRendererService.on('close-tab', (event: Event) => {
+            this.removeTab(this.activTab);
+        });
+
         // ipc switch tab
         this.ipcRendererService.on('switch-tab', (event: Event, action: string | number) => {
             console.log('switch tab');
