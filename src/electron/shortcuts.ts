@@ -17,7 +17,7 @@ export class ShortCuts {
         this.isBinded = false;
     }
 
-    public bind(): void {
+    public bindAll(): void {
         async.forEachOf(settings.getSync('option.shortcut.no-emu.tabs'), (shortcut: string, index: number) => {
             if (shortcut) {
                 electronLocalshortcut.register(this.win, ShortCuts.convert(shortcut), () => {
@@ -34,7 +34,7 @@ export class ShortCuts {
         electronLocalshortcut.unregisterAll(this.win);
 
         // bind again
-        this.bind();
+        this.bindAll();
 
         // send IPC to the client
         this.win.webContents.send('reload-shortcuts');
@@ -42,7 +42,7 @@ export class ShortCuts {
 
     public enable(): void {
         if (!this.isBinded) {
-            this.bind()
+            this.bindAll()
         } else {
             electronLocalshortcut.enableAll(this.win);
         }
