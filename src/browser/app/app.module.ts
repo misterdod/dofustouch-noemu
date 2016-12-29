@@ -6,7 +6,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent } from './app.component';
 import {GameComponent} from './game/game.component';
 import { TabService } from './tab/tab.service';
-import { ShortCutsService } from './shortcuts/shortcuts.service';
+import { IpcRendererService } from './electron/ipcrenderer.service';
+
+const { ipcRenderer } = (<any>global).nodeRequire('electron');
 
 @NgModule({
     imports: [
@@ -21,8 +23,8 @@ import { ShortCutsService } from './shortcuts/shortcuts.service';
     ],
     providers: [
         TabService,
-        ShortCutsService,
-        { provide: 'Window', useValue: window }
+        { provide: 'Window', useValue: window },
+        IpcRendererService
     ],
     bootstrap: [AppComponent]
 })
