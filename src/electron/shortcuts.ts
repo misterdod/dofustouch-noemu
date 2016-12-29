@@ -1,6 +1,3 @@
-/// <reference path="../../node_modules/@types/node/index.d.ts" />
-/// <reference path="../../node_modules/@types/electron/index.d.ts" />
-
 const electronLocalshortcut = require('electron-localshortcut');
 const settings = require('electron-settings');
 const {app} = require('electron');

@@ -1,5 +1,3 @@
-/// <reference path="../../node_modules/@types/node/index.d.ts" />
-/// <reference path="../../node_modules/@types/electron/index.d.ts" />
 const settings = require('electron-settings');
 const electron = require('electron');
 const { app, Menu } = electron;
@@ -34,7 +32,7 @@ export class GameWindow {
 
     public run(): void {
         // load the app
-        this.win.loadURL(`file://${__dirname}/../browser/index.html`,
+        this.win.loadURL(`file://${__dirname}/../browser/index.html#/main`,
             { userAgent: this.generateUA() });
 
         // set menu
@@ -42,6 +40,7 @@ export class GameWindow {
 
         // bind shortcuts
         this.shortCuts.enable();
+
 
         if (this.devMode) {
             this.win.webContents.openDevTools();

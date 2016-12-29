@@ -1,15 +1,15 @@
 import { Component, Optional, Input, Inject, NgZone } from '@angular/core';
 import { Tab } from './../tab/tab';
-import { ShortCuts } from '../shortcuts/shortcuts';
+import { ShortCuts } from './../../shortcuts/shortcuts';
 import * as async from 'async';
-import { IpcRendererService } from './../electron/ipcrenderer.service';
+import { IpcRendererService } from './../../electron/ipcrenderer.service';
 
 const settings = (<any>global).nodeRequire('electron-settings');
 
 @Component({
     selector: 'game',
-    templateUrl: 'app/game/game.component.html',
-    styleUrls: ['app/game/game.component.css']
+    templateUrl: 'app/main/game/game.component.html',
+    styleUrls: ['app/main/game/game.component.css']
 })
 export class GameComponent {
 

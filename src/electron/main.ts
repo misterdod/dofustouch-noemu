@@ -1,4 +1,3 @@
-/// <reference path="../../node_modules/@types/node/index.d.ts" />
 const electron = require('electron');
 
 import {Application} from './application';

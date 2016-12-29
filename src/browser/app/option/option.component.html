@@ -1,0 +1,19 @@
+<div class="col-xs-2" id="left-menu" style="position:fixed">
+    <ul class="nav nav-pills tabs-left" fxFlex>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/option/general" routerLinkActive="active">
+                General
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/option/shortcuts" routerLinkActive="active">
+                Raccourcis
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="offset-xs-2 col-xs-10" id="right-menu" style="height:100%">
+    <div class="tab-content">
+         <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,10 +1,9 @@
-/// <reference path="../../node_modules/@types/node/index.d.ts" />
-/// <reference path="../../node_modules/@types/electron/index.d.ts" />
 const {app, ipcMain} = require('electron');
 const settings = require('electron-settings');
 
 import { ShortCuts } from './shortcuts';
 import { Application } from './application';
+import { OptionWindow } from './option-window';
 
 export class GameMenuTemplate {
 
@@ -167,7 +166,7 @@ export class GameMenuTemplate {
                     {
                         label: 'Options',
                         click (item: Electron.MenuItem, focusedWindow: Electron.BrowserWindow) {
-                            require('./Option').init(focusedWindow)
+                            new OptionWindow(application).run();
                         }
                     }
                 ]

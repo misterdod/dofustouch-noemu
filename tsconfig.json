@@ -22,7 +22,8 @@
             "node",
             "hammerjs",
             "keymaster",
-            "async"
+            "async",
+            "electron"
         ]
     },
     "exclude": [
