@@ -88,7 +88,7 @@ export class GameMenuTemplate {
                         }
                     },
                     {
-                        label: 'Toggle Developer Tools',
+                        label: 'Outils Developpeur',
                         accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
                         click (item: Electron.MenuItem, focusedWindow: Electron.BrowserWindow) {
                             if (focusedWindow) focusedWindow.webContents.toggleDevTools()
