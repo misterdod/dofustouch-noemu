@@ -1,4 +1,4 @@
-import { Component, Optional, Input, Inject } from '@angular/core';
+import { Component, Optional, Input, Inject, NgZone } from '@angular/core';
 import { Tab } from './../tab/tab';
 import { ShortCuts } from '../shortcuts/shortcuts';
 import * as async from 'async';
@@ -20,6 +20,7 @@ export class GameComponent {
     constructor(
         @Inject('Window') private window: Window,
         private ipcRendererService: IpcRendererService,
+        private zone: NgZone
     ) {
 
     }
@@ -28,7 +29,7 @@ export class GameComponent {
         this.setEventListener();
     }
 
-    private setEventListener(): void{
+    private setEventListener(): void {
 
         // event -> resize window game
         this.wGame.onresize = () => {
@@ -39,9 +40,11 @@ export class GameComponent {
         // event -> log into the world
         (<any>this.wGame).gui.playerData.on("characterSelectedSuccess", () => {
 
-            // retrieve character name
-            this.tab.character = (<any>this.wGame).gui.playerData.characterBaseInformations.name;
-            this.tab.isLogged = true;
+            // retrieve character name and update zone.js
+            this.zone.run(() => {
+                this.tab.character = (<any>this.wGame).gui.playerData.characterBaseInformations.name;
+                this.tab.isLogged = true;
+            });
 
             // bind shortcut
             this.bindShortcuts();
@@ -49,7 +52,7 @@ export class GameComponent {
 
         // event -> electron ask for reload setting
         this.ipcRendererService.on('reload-settings', (event: any, arg: any) => {
-            if(this.tab.isLogged){
+            if (this.tab.isLogged) {
                 // unbind all registered shortcuts
                 this.shortCuts.unBindAll();
 
@@ -62,28 +65,28 @@ export class GameComponent {
     private bindShortcuts(): void {
 
         // end turn
-        this.shortCuts.bind(settings.getSync('option.shortcut.diver.end-turn'), ()=>{
+        this.shortCuts.bind(settings.getSync('option.shortcut.diver.end-turn'), () => {
             (<any>this.wGame).gui.fightManager.finishTurn()
         });
 
         // spell
-        async.forEachOf(settings.getSync('option.shortcut.spell'), (shortcut: string, index: number) =>{
-            this.shortCuts.bind(shortcut, ()=>{
+        async.forEachOf(settings.getSync('option.shortcut.spell'), (shortcut: string, index: number) => {
+            this.shortCuts.bind(shortcut, () => {
                 (<any>this.wGame).gui.shortcutBar.panels.spell.slotList[index].tap();
             });
         });
 
         // item
-        async.forEachOf(settings.getSync('option.shortcut.item'), (shortcut: string, index: number) =>{
-            this.shortCuts.bind(shortcut, ()=>{
+        async.forEachOf(settings.getSync('option.shortcut.item'), (shortcut: string, index: number) => {
+            this.shortCuts.bind(shortcut, () => {
                 (<any>this.wGame).gui.shortcutBar.panels.item.slotList[index].tap();
             });
         });
 
         // interfaces
-        async.forEachOf(settings.getSync('option.shortcut.interface'), (shortcut: string, key: string) =>{
+        async.forEachOf(settings.getSync('option.shortcut.interface'), (shortcut: string, key: string) => {
             (<any>this.wGame).gui.menuBar._icons._childrenList.forEach((element: any, index: number) => {
-                if(element.id.toUpperCase() == key.toUpperCase()){
+                if (element.id.toUpperCase() == key.toUpperCase()) {
                     this.shortCuts.bind(shortcut, () => {
                         let newIndex = index;
                         (<any>this.wGame).gui.menuBar._icons._childrenList[newIndex].tap();
