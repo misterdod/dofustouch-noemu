@@ -35,7 +35,8 @@ $ npm start
 
 ## Développement :
 No-Emu est developpé sous angular 2 avec typescript. Il faut distinguer ainsi 2 contexts, celui du navigateur et celui de electron (context node.js).
-Ainsi nous avons cette structure :
+
+### Structure des dossiers :
 
     .
     ├── gulpfile.js                     # contient le script pour gulp (build typescript)
