@@ -1,18 +1,23 @@
-export const DefaultSettings = {
-    "option" :{
-        "general": {
-            "hidden-shop": false,
-            "developer-mode": false,
-            "resolution": "1280;720"
+import { ISettings } from './../shared/settings';
+
+export const DefaultSettings: ISettings = {
+    option: {
+        general: {
+            hidden_shop: false,
+            developper_mode: false,
+            resolution: {
+                x: 1280,
+                y: 720
+            }
         },
-        "shortcut": {
-            "no-emu": {
-                "new-tab": "ctrl+t",
-                "new-window": "ctrl+n",
-                "next-tab": "alt+right",
-                "prev-tab": "alt+left",
-                "activ-tab": "",
-                "tabs": [
+        shortcuts: {
+            no_emu: {
+                new_tab: "ctrl+t",
+                new_window: "ctrl+n",
+                next_tab: "alt+right",
+                prev_tab: "alt+left",
+                activ_tab: "",
+                tabs: [
                     "f1",
                     "f2",
                     "f3",
@@ -25,10 +30,10 @@ export const DefaultSettings = {
                     "f10"
                 ]
             },
-            "diver": {
-                "end-turn": "backspace"
+            diver: {
+                end_turn: "backspace"
             },
-            "spell": [
+            spell: [
                 "1",
                 "2",
                 "3",
@@ -60,7 +65,7 @@ export const DefaultSettings = {
                 "",
                 ""
             ],
-            "item": [
+            item: [
                 "ctrl+1",
                 "ctrl+2",
                 "ctrl+3",
@@ -92,29 +97,28 @@ export const DefaultSettings = {
                 "",
                 ""
             ],
-            "interface": {
-                "carac": "c",
-                "spell": "s",
-                "bag": "i",
-                "bidhouse": "h",
-                "map": "m",
-                "friend": "f",
-                "book": "q",
-                "guild": "g",
-                "conquest": "k",
-                "goutine": "",
-                "job": "j",
-                "alliance": "",
-                "mount": "n",
-                "directory": "",
-                "alignement": "",
-                "bestiary": "b",
-                "title": "n",
-                "achievement": "u",
-                "almanax": "x",
-                "spouse": "l",
-                "shop": "v",
-                "goultine": "r"
+            interface: {
+                carac: "c",
+                spell: "s",
+                bag: "i",
+                bidhouse: "h",
+                map: "m",
+                friend: "f",
+                book: "q",
+                guild: "g",
+                conquest: "k",
+                job: "j",
+                alliance: "",
+                mount: "n",
+                directory: "",
+                alignement: "",
+                bestiary: "b",
+                title: "n",
+                achievement: "u",
+                almanax: "x",
+                spouse: "l",
+                shop: "v",
+                goultine: "r"
             }
         }
     }
