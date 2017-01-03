@@ -60,6 +60,12 @@ export class GameComponent {
                 this.bindShortcuts();
             }
         });
+        
+        // event -> party invitation
+        (<any>this.wGame).gui.on("PartyInvitationMessage", (partyData: any) => {
+            this.acceptPartyInvitation(partyData)
+        });
+
     }
 
     private bindShortcuts(): void {
@@ -95,6 +101,21 @@ export class GameComponent {
                 }
             });
         });
+    }
+    
+    /**
+    * Join a party
+    * @param partyData : data received from Dofus and contains informations about the party to join
+    */
+    private acceptPartyInvitation(partyData: {fromName: string, partyId: number}): void {
+        // TODO : "{fromPlayerName}" to replace with an option that contains several pseudo?
+        if("{fromPlayerName}" == partyData.fromName) {
+            // (<any>this.wGame).gui.notificationBar.removeNotification("party" + partyData.partyId);
+            (<any>this.wGame).dofus.sendMessage("PartyAcceptInvitationMessage", {
+                partyId: partyData.partyId
+            });
+            (<any>this.wGame).gui._closePartyInvitation(partyData.partyId);
+        }
     }
 
     ngOnInit() {
