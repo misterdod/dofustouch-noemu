@@ -11,9 +11,7 @@ import { IpcRendererService } from './../electron/ipcrenderer.service';
     templateUrl: 'app/main/main.component.html',
     styleUrls: ['app/main/main.component.css'],
     host: {
-        "fxFlex": "",
-        "fxFill": "",
-        "style":"height:100%" // find something less ugly in future
+        "style":"height:100%; overflow: hidden;" // find something less ugly in future
     }
 })
 export class MainComponent {

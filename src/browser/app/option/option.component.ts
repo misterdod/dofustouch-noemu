@@ -15,5 +15,5 @@ import { IpcRendererService } from './../electron/ipcrenderer.service';
     }
 })
 export class OptionComponent {
-
+    
 }

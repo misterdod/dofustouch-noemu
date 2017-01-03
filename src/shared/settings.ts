@@ -1,13 +1,15 @@
+export interface IGeneral {
+    hidden_shop: false;
+    developper_mode: false;
+    resolution: {
+        x: number;
+        y: number;
+    }
+}
+
 export interface ISettings {
     option: {
-        general: {
-            hidden_shop: false;
-            developper_mode: false;
-            resolution: {
-                x: number;
-                y: number;
-            }
-        }
+        general: IGeneral;
         shortcuts: {
             no_emu: {
                 new_tab: string;
