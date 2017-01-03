@@ -13,6 +13,7 @@ export class Application {
 
     constructor(){
         settings.defaults(DefaultSettings);
+        settings.resetToDefaultsSync();
         this.devMode = true/*settings.getSync('option.general.developer-mode')*/;
     }
 
