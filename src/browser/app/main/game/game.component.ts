@@ -60,13 +60,23 @@ export class GameComponent {
                 this.bindShortcuts();
             }
         });
+        
+        // event -> party invitation
+        (<any>this.wGame).gui.on("PartyInvitationMessage", (partyData: any) => {
+            this.acceptPartyInvitation(partyData)
+        });
+
+        // event -> fight auto join
+        (<any>this.wGame).gui.on("PartyMemberInFightMessage", (fightData: any) => {
+            this.joinFight(fightData)
+        });
     }
 
     private bindShortcuts(): void {
 
         // end turn
         this.shortCuts.bind(settings.getSync('option.shortcuts.diver.end_turn'), () => {
-            (<any>this.wGame).gui.fightManager.finishTurn()
+            this.finishTurn()
         });
 
         // spell
@@ -95,6 +105,61 @@ export class GameComponent {
                 }
             });
         });
+    }
+    
+    private finishTurn(): void {
+        (<any>this.wGame).gui.fightManager.finishTurn()
+    }
+
+    /**
+    * Join a fight
+    * @param fightData : data received from Dofus and contains informations about the fight to join
+    */
+    private joinFight(fightData: {fightId: number, memberId: number, memberName: string}): void {
+        /* reçu :
+        _isInitialized:true
+        _messageType:"PartyMemberInFightMessage"
+        fightId:xxx
+        fightMap:Object
+        memberAccountId:xxx
+        memberId:xxx
+        memberName:"yyy"
+        partyId:xxx
+        reason:1
+        secondsBeforeFightStart:44998
+        */
+        var i = (<any>this.wGame).gui.playerData.isFighting && !(<any>this.wGame).gui.playerData.isSpectator;
+        /* TODO : "{fromPlayerName}" to replace with an option that contains several pseudo?
+                  or join if fight is from party?*/
+        if (!i && "{fromPlayerName}" == fightData.memberName) {
+          // to send : fightId:901 ; fighterId:115905
+          (<any>this.wGame).dofus.sendMessage("GameFightJoinRequestMessage", {
+            fightId: fightData.fightId,
+            fighterId: fightData.memberId
+          });
+
+          // FIXME : ne fonctionne pas (pour le is ready en auto)
+          //(<any>this.wGame).gui.on("GameFightJoinMessage", (e) => {
+          //  (<any>this.wGame).dofus.sendMessage("GameFightJoinRequestMessage", {
+          //  isReady: true
+          //  });
+          //});
+        }
+    }
+
+    /**
+    * Join a party
+    * @param partyData : data received from Dofus and contains informations about the party to join
+    */
+    private acceptPartyInvitation(partyData: {fromName: string, partyId: number}): void {
+        // TODO : "{fromPlayerName}" to replace with an option that contains several pseudo?
+        if("{fromPlayerName}" == partyData.fromName) {
+            // (<any>this.wGame).gui.notificationBar.removeNotification("party" + partyData.partyId);
+            (<any>this.wGame).dofus.sendMessage("PartyAcceptInvitationMessage", {
+                partyId: partyData.partyId
+            });
+            (<any>this.wGame).gui._closePartyInvitation(partyData.partyId);
+        }
     }
 
     ngOnInit() {
