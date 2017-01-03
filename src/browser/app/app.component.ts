@@ -7,6 +7,9 @@ import { IpcRendererService } from './electron/ipcrenderer.service';
     selector: 'application',
     templateUrl: 'app/app.component.html',
     styleUrls: ['app/app.component.css'],
+    host: {
+
+    }
 })
 export class AppComponent {
 

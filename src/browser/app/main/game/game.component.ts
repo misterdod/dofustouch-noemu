@@ -65,26 +65,26 @@ export class GameComponent {
     private bindShortcuts(): void {
 
         // end turn
-        this.shortCuts.bind(settings.getSync('option.shortcut.diver.end-turn'), () => {
+        this.shortCuts.bind(settings.getSync('option.shortcuts.diver.end_turn'), () => {
             (<any>this.wGame).gui.fightManager.finishTurn()
         });
 
         // spell
-        async.forEachOf(settings.getSync('option.shortcut.spell'), (shortcut: string, index: number) => {
+        async.forEachOf(settings.getSync('option.shortcuts.spell'), (shortcut: string, index: number) => {
             this.shortCuts.bind(shortcut, () => {
                 (<any>this.wGame).gui.shortcutBar.panels.spell.slotList[index].tap();
             });
         });
 
         // item
-        async.forEachOf(settings.getSync('option.shortcut.item'), (shortcut: string, index: number) => {
+        async.forEachOf(settings.getSync('option.shortcuts.item'), (shortcut: string, index: number) => {
             this.shortCuts.bind(shortcut, () => {
                 (<any>this.wGame).gui.shortcutBar.panels.item.slotList[index].tap();
             });
         });
 
         // interfaces
-        async.forEachOf(settings.getSync('option.shortcut.interface'), (shortcut: string, key: string) => {
+        async.forEachOf(settings.getSync('option.shortcuts.interface'), (shortcut: string, key: string) => {
             (<any>this.wGame).gui.menuBar._icons._childrenList.forEach((element: any, index: number) => {
                 if (element.id.toUpperCase() == key.toUpperCase()) {
                     this.shortCuts.bind(shortcut, () => {

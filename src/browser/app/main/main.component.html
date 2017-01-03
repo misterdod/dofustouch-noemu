@@ -1,4 +1,4 @@
-<ul class="nav nav-pills" fxFlex>
+<ul class="nav nav-pills">
     <li *ngFor="let tab of tabs; let i = index;" class="nav-item game-tab">
         <a class="nav-link" [class.active]="tab.isFocus" href="#">
             <span (click)="selectTab(tab)">{{tab.character}}</span>
@@ -11,9 +11,9 @@
         </a>
     </li>
 </ul>
-<div fxFlex fxFill>
-    <game *ngFor="let tab of tabs" [tab]="tab" fxFlex fxFill [hidden]="!tab.isFocus"></game>
-</div>
+
+<game *ngFor="let tab of tabs" [tab]="tab" [hidden]="!tab.isFocus"></game>
+
 
 <!-- <md-sidenav-layout fullscreen>
 
