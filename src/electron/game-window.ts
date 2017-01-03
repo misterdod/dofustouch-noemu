@@ -17,8 +17,8 @@ export class GameWindow {
         this.application = application;
         this.devMode = settings.getSync('option.general.developer-mode');
         this.win = new electron.BrowserWindow({
-            width: parseInt(settings.getSync('option.general.resolution').split(';')[0]),
-            height: parseInt(settings.getSync('option.general.resolution').split(';')[1]),
+            width: parseInt(settings.getSync('option.general.resolution').x),
+            height: parseInt(settings.getSync('option.general.resolution').y),
             title: 'DofusTouch-NE',
             useContentSize: true,
             center: true,
