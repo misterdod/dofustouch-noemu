@@ -1,6 +1,6 @@
 import {Component, Optional, ViewEncapsulation, Inject, Input, NgZone} from '@angular/core';
 import { SettingsService } from '../../../settings/settings.service';
-
+import { InputComponent } from '../input/input.component'
 
 //const { ipcRenderer } = (<any>global).nodeRequire('electron');
 
@@ -14,10 +14,20 @@ import { SettingsService } from '../../../settings/settings.service';
 })
 export class NoEmuComponent {
 
+
     constructor(
         private settingsService: SettingsService
     ) {
 
+    }
+
+    public range(start: number, end: number): Array<number> {
+        let arr = [];
+
+        for(let i = start; i <= end; i++)
+            arr.push(i);
+
+        return arr;
     }
 
 }

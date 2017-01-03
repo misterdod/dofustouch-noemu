@@ -15,6 +15,7 @@ import { OptionComponent } from './option/option.component';
 import { GeneralComponent } from './option/general/general.component';
 import { ShortcutsComponent } from './option/shortcuts/shortcuts.component';
 import { NoEmuComponent } from './option/shortcuts/no-emu/no-emu.component';
+import { InputComponent } from './option/shortcuts/input/input.component';
 
 
 import { GameComponent } from './main/game/game.component';
@@ -65,7 +66,8 @@ import { SettingsService } from './settings/settings.service';
         OptionComponent,
         GeneralComponent,
         ShortcutsComponent,
-        NoEmuComponent
+        NoEmuComponent,
+        InputComponent
     ],
     providers: [
         TabService,

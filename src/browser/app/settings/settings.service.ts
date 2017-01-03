@@ -104,7 +104,7 @@ export module Option {
             }
 
             get new_window(): string{
-                return this.new_window;
+                return this._new_window;
             }
 
             set new_window(new_window: string){
@@ -113,7 +113,7 @@ export module Option {
             }
 
             get next_tab(): string{
-                return this.next_tab;
+                return this._next_tab;
             }
 
             set next_tab(next_tab: string){
