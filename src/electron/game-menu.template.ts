@@ -1,4 +1,4 @@
-const {app, ipcMain} = require('electron');
+import {app, ipcMain} from 'electron';
 const settings = require('electron-settings');
 
 import { ShortCuts } from './shortcuts';
@@ -15,14 +15,14 @@ export class GameMenuTemplate {
                 submenu: [
                     {
                         label: 'Nouvelle Fenetre',
-                        accelerator: ShortCuts.convert(settings.getSync('option.shortcut.no-emu.new-window')),
+                        accelerator: ShortCuts.convert(settings.getSync('option.shortcuts.no_emu.new_window')),
                         click (item: Electron.MenuItem, focusedWindow: Electron.BrowserWindow) {
                             application.addWindow();
                         }
                     },
                     {
                         label: 'Nouveau Onglet',
-                        accelerator: ShortCuts.convert(settings.getSync('option.shortcut.no-emu.new-tab')),
+                        accelerator: ShortCuts.convert(settings.getSync('option.shortcuts.no_emu.new_tab')),
                         click (item: Electron.MenuItem, focusedWindow: Electron.BrowserWindow) {
                             focusedWindow.webContents.send('new-tab', {});
                         }
@@ -122,14 +122,14 @@ export class GameMenuTemplate {
                 submenu: [
                     {
                         label: 'Montret Onglet Précédent',
-                        accelerator: ShortCuts.convert(settings.getSync('option.shortcut.no-emu.prev-tab')),
+                        accelerator: ShortCuts.convert(settings.getSync('option.shortcuts.no_emu.prev_tab')),
                         click (item: Electron.MenuItem, focusedWindow: Electron.BrowserWindow) {
                             focusedWindow.webContents.send('switch-tab', 'prev');
                         }
                     },
                     {
                         label: 'Montret Onglet Suivant',
-                        accelerator: ShortCuts.convert(settings.getSync('option.shortcut.no-emu.next-tab')),
+                        accelerator: ShortCuts.convert(settings.getSync('option.shortcuts.no_emu.next_tab')),
                         click (item: Electron.MenuItem, focusedWindow: Electron.BrowserWindow) {
                             focusedWindow.webContents.send('switch-tab', 'next');
                         }
