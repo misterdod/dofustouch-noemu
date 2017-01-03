@@ -12,14 +12,15 @@ export class OptionWindow {
     constructor(application: Application){
         this.application = application;
         this.win = new electron.BrowserWindow({
-            width: 710,
+            width: 800,
             height: 500,
             resizable: false,
             center: true,
             parent: electron.BrowserWindow.getFocusedWindow(),
             darkTheme: true,
             skipTaskbar: true,
-            show: false
+            show: false,
+            title: 'Option',
         });
 
         this.win.on('closed', () => {
