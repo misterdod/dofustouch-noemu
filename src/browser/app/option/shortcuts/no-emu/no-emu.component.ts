@@ -5,7 +5,7 @@ import { InputComponent } from '../input/input.component'
 //const { ipcRenderer } = (<any>global).nodeRequire('electron');
 
 @Component({
-    selector: 'option-shortcuts',
+    selector: 'option-shortcuts-no-emu',
     templateUrl: 'app/option/shortcuts/no-emu/no-emu.component.html',
     styleUrls: ['app/option/shortcuts/no-emu/no-emu.component.css'],
     host: {
