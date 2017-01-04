@@ -26,6 +26,45 @@ export module Option {
         constructor() {
             this.no_emu = new Shortcuts.NoEmu();
             this.diver = new Shortcuts.Diver();
+            this.interface = new Shortcuts.Interface();
+            this._spell = settings.getSync('option.shortcuts.spell');
+            this._item = settings.getSync('option.shortcuts.item');
+        }
+
+        get spell(): Array<string> {
+            return new Proxy(this._spell, {
+                get: function(target, name) {
+                    return target[name];
+                },
+                set(target, prop: string, value) {
+                    target[prop] = value;
+                    settings.setSync('option.shortcuts.spell', target);
+                    return true;
+                }
+            });
+        }
+
+        set spell(spell: Array<string>) {
+            settings.setSync('option.shortcuts.spell', spell);
+            this._spell = spell;
+        }
+
+        get item(): Array<string> {
+            return new Proxy(this._item, {
+                get: function(target, name) {
+                    return target[name];
+                },
+                set(target, prop: string, value) {
+                    target[prop] = value;
+                    settings.setSync('option.shortcuts.item', target);
+                    return true;
+                }
+            });
+        }
+
+        set item(item: Array<string>) {
+            settings.setSync('option.shortcuts.item', item);
+            this._item = item;
         }
     }
 
@@ -54,35 +93,154 @@ export module Option {
             private _shop: string;
             private _goultine: string;
 
-            get carac(): string {
-                return this._carac;
-            }
-
+            get carac(): string { return this._carac; }
             set carac(carac: string) {
                 settings.setSync('option.shortcuts.interface.carac', carac);
                 this._carac = carac;
             }
 
-            get spell(): string {
-                return this._spell;
-            }
-
+            get spell(): string { return this._spell; }
             set spell(spell: string) {
                 settings.setSync('option.shortcuts.interface.spell', spell);
                 this._spell = spell;
             }
 
-            get bag(): string {
-                return this._bag;
-            }
-
+            get bag(): string { return this._bag; }
             set bag(bag: string) {
                 settings.setSync('option.shortcuts.interface.bag', bag);
                 this._bag = bag;
             }
 
-            constructor() {
+            get bidhouse(): string { return this._bidhouse; }
+            set bidhouse(bidhouse: string) {
+                settings.setSync('option.shortcuts.interface.bidhouse', bidhouse);
+                this._bidhouse = bidhouse;
+            }
 
+            get map(): string { return this._map; }
+            set map(map: string) {
+                settings.setSync('option.shortcuts.interface.map', map);
+                this._map = map;
+            }
+
+            get friend(): string { return this._friend; }
+            set friend(friend: string) {
+                settings.setSync('option.shortcuts.interface.friend', friend);
+                this._friend = friend;
+            }
+
+            get book(): string { return this._book; }
+            set book(book: string) {
+                settings.setSync('option.shortcuts.interface.book', book);
+                this._book = book;
+            }
+
+            get guild(): string { return this._guild; }
+            set guild(guild: string) {
+                settings.setSync('option.shortcuts.interface.guild', guild);
+                this._guild = guild;
+            }
+
+            get conquest(): string { return this._conquest; }
+            set conquest(conquest: string) {
+                settings.setSync('option.shortcuts.interface.guild', conquest);
+                this._conquest = conquest;
+            }
+
+            get job(): string { return this._job; }
+            set job(job: string) {
+                settings.setSync('option.shortcuts.interface.job', job);
+                this._job = job;
+            }
+
+            get alliance(): string { return this._alliance; }
+            set alliance(alliance: string) {
+                settings.setSync('option.shortcuts.interface.alliance', alliance);
+                this._alliance = alliance;
+            }
+
+            get mount(): string { return this._mount; }
+            set mount(mount: string) {
+                settings.setSync('option.shortcuts.interface.guild', mount);
+                this._mount = mount;
+            }
+
+            get directory(): string { return this._directory; }
+            set directory(directory: string) {
+                settings.setSync('option.shortcuts.interface.directory', directory);
+                this._directory = directory;
+            }
+
+            get alignement(): string { return this._alignement; }
+            set alignement(alignement: string) {
+                settings.setSync('option.shortcuts.interface.alignement', alignement);
+                this._alignement = alignement;
+            }
+
+            get bestiary(): string { return this._bestiary; }
+            set bestiary(bestiary: string) {
+                settings.setSync('option.shortcuts.interface.bestiary', bestiary);
+                this._bestiary = bestiary;
+            }
+
+            get title(): string { return this._title; }
+            set title(title: string) {
+                settings.setSync('option.shortcuts.interface.title', title);
+                this._title = title;
+            }
+
+            get achievement(): string { return this._achievement; }
+            set achievement(achievement: string) {
+                settings.setSync('option.shortcuts.interface.achievement', achievement);
+                this._achievement = achievement;
+            }
+
+            get almanax(): string { return this._almanax; }
+            set almanax(almanax: string) {
+                settings.setSync('option.shortcuts.interface.almanax', almanax);
+                this._almanax = almanax;
+            }
+
+            get spouse(): string { return this._spouse; }
+            set spouse(spouse: string) {
+                settings.setSync('option.shortcuts.interface.spouse', spouse);
+                this._spouse = spouse;
+            }
+
+            get shop(): string { return this._shop; }
+            set shop(shop: string) {
+                settings.setSync('option.shortcuts.interface.shop', shop);
+                this._shop = shop;
+            }
+
+            get goultine(): string { return this._goultine; }
+            set goultine(goultine: string) {
+                settings.setSync('option.shortcuts.interface.goultine', goultine);
+                this._goultine = goultine;
+            }
+
+            constructor() {
+                this._carac = settings.getSync('option.shortcuts.interface.carac');
+                this._spell = settings.getSync('option.shortcuts.interface.spell');
+                this._bag = settings.getSync('option.shortcuts.interface.bag');
+                this._bidhouse = settings.getSync('option.shortcuts.interface.bidhouse');
+                this._map = settings.getSync('option.shortcuts.interface.map');
+                this._friend = settings.getSync('option.shortcuts.interface.friend');
+                this._book = settings.getSync('option.shortcuts.interface.book');
+                this._guild = settings.getSync('option.shortcuts.interface.guild');
+                this._conquest = settings.getSync('option.shortcuts.interface.conquest');
+                this._job = settings.getSync('option.shortcuts.interface.job');
+                this._alliance = settings.getSync('option.shortcuts.interface.alliance');
+                this._mount = settings.getSync('option.shortcuts.interface.mount');
+                this._directory = settings.getSync('option.shortcuts.interface.directory');
+                this._alignement = settings.getSync('option.shortcuts.interface.alignement');
+                this._bestiary = settings.getSync('option.shortcuts.interface.bestiary');
+                this._title = settings.getSync('option.shortcuts.interface.title');
+                this._achievement = settings.getSync('option.shortcuts.interface.achievement');
+                this._almanax = settings.getSync('option.shortcuts.interface.almanax');
+                this._spouse = settings.getSync('option.shortcuts.interface.spouse');
+                this._shop = settings.getSync('option.shortcuts.interface.shop');
+                this._goultine = settings.getSync('option.shortcuts.interface.goultine');
             }
         }
 
@@ -145,8 +303,6 @@ export module Option {
                         return target[name];
                     },
                     set(target, prop: string, value) {
-                        console.log('proxy set tabs');
-                        //this._tabs[prop] = value;
                         target[prop] = value;
                         settings.setSync('option.shortcuts.no_emu.tabs', target);
                         return true;

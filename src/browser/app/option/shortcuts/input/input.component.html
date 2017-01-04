@@ -2,7 +2,7 @@
     <label for="{{id}}" class="col-xs-5 col-form-label">{{name}}</label>
     <div class="col-xs-7">
         <div class="input-group">
-            <input [(ngModel)]="model" (ngModelChange)="modelChange.emit($event)" type="text" class="shortcut form-control" id="{{id}}">
+            <input [(ngModel)]="model" (ngModelChange)="modelChange.emit($event)" (keyup)="keyUp($event)" (keydown)="keyDown($event)" type="text" class="shortcut form-control" id="{{id}}">
             <span class="input-group-addon">
                 <i class="fa fa-times"></i>
             </span>

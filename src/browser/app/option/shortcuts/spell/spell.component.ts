@@ -5,15 +5,14 @@ import { InputComponent } from '../input/input.component'
 //const { ipcRenderer } = (<any>global).nodeRequire('electron');
 
 @Component({
-    selector: 'option-shortcuts-no-emu',
-    templateUrl: 'app/option/shortcuts/no-emu/no-emu.component.html',
-    styleUrls: ['app/option/shortcuts/no-emu/no-emu.component.css'],
+    selector: 'option-shortcuts-spell',
+    templateUrl: 'app/option/shortcuts/spell/spell.component.html',
+    styleUrls: ['app/option/shortcuts/spell/spell.component.css'],
     host: {
 
     }
 })
-export class NoEmuComponent {
-
+export class SpellComponent {
 
     constructor(
         private settingsService: SettingsService

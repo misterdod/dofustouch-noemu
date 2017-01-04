@@ -47,13 +47,13 @@ gulp.task('tslint', function() {
 
 // Run browsersync for development
 gulp.task('serve', ['build'], function() {
-    browserSync({
+    /*browserSync({
         server: {
             baseDir: ''
         },
         ghostMode: false,
         startPath: '/build/browser'
-    });
+    });*/
 
     gulp.watch(paths.srcFiles, ['buildAndReload']);
 });
