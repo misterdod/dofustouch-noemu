@@ -8,18 +8,26 @@ import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+/* AppComponent */
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
 
+/* MainComponent */
+import { MainComponent } from './main/main.component';
+import { GameComponent } from './main/game/game.component';
+import { TabService } from './main/tab/tab.service';
+
+/* OptionComponent */
 import { OptionComponent } from './option/option.component';
 import { GeneralComponent } from './option/general/general.component';
 import { ShortcutsComponent } from './option/shortcuts/shortcuts.component';
 import { NoEmuComponent } from './option/shortcuts/no-emu/no-emu.component';
+import { DiverComponent } from './option/shortcuts/diver/diver.component';
+import { SpellComponent } from './option/shortcuts/spell/spell.component';
+import { ItemComponent } from './option/shortcuts/item/item.component';
+import { InterfaceComponent } from './option/shortcuts/interface/interface.component';
 import { InputComponent } from './option/shortcuts/input/input.component';
 
-
-import { GameComponent } from './main/game/game.component';
-import { TabService } from './main/tab/tab.service';
+/* general */
 import { IpcRendererService } from './electron/ipcrenderer.service';
 import { SettingsService } from './settings/settings.service';
 
@@ -45,7 +53,11 @@ import { SettingsService } from './settings/settings.service';
                         component: ShortcutsComponent,
                         children: [
                             { path: '', redirectTo: 'no-emu', pathMatch: 'full' },
-                            { path: 'no-emu', component: NoEmuComponent }
+                            { path: 'no-emu', component: NoEmuComponent },
+                            { path: 'diver', component: DiverComponent },
+                            { path: 'spell',  component: SpellComponent },
+                            { path: 'item',  component: ItemComponent },
+                            { path: 'interface',  component: InterfaceComponent }
                         ]
 
                     },
@@ -67,7 +79,11 @@ import { SettingsService } from './settings/settings.service';
         GeneralComponent,
         ShortcutsComponent,
         NoEmuComponent,
-        InputComponent
+        InputComponent,
+        DiverComponent,
+        SpellComponent,
+        ItemComponent,
+        InterfaceComponent
     ],
     providers: [
         TabService,
